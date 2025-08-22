@@ -12,8 +12,14 @@ function LoginContent() {
   const code = searchParams.get('code')
 
   useEffect(() => {
+    console.log('🔍 URL search params:', searchParams.toString())
+    console.log('🔍 Code parameter:', code)
+    
     if (code) {
+      console.log('🎯 Code found, starting OAuth callback...')
       handleOAuthCallback(code)
+    } else {
+      console.log('❌ No code parameter found')
     }
   }, [code])
 
