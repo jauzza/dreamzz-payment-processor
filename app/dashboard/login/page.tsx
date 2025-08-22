@@ -38,7 +38,7 @@ function LoginContent() {
   }
 
   const handleLogin = () => {
-    const clientId = '1403398146435846154' // Your existing Discord Client ID
+    const clientId = '1404275438532038789' // Your current Discord Client ID
     const redirectUri = encodeURIComponent(`${window.location.origin}/dashboard/login`)
     const scope = 'identify guilds'
     

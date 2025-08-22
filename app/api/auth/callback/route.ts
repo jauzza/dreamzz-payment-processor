@@ -1,8 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { cookies } from 'next/headers'
 
-const DISCORD_CLIENT_ID = '1403398146435846154' // Your existing Discord Client ID
-const DISCORD_CLIENT_SECRET = 'xxbLsqizKv0Rx3pMqrWqi4NP5EsVa8dG' // Your existing Discord Client Secret
+const DISCORD_CLIENT_ID = '1404275438532038789' // Your current Discord Client ID
+const DISCORD_CLIENT_SECRET = '26yeMsVD1spP7jC6jsA6w5iDQ_5TZwTe' // Your current Discord Client Secret
 
 export async function POST(request: NextRequest) {
   try {
