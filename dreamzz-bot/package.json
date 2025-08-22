@@ -1,0 +1,26 @@
+{
+  "name": "dreamzz-bot",
+  "version": "1.0.0",
+  "description": "Dreamzz Discord Bot with payment verification, content posting, and management features",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "ts-node src/index.ts",
+    "watch": "nodemon src/index.ts"
+  },
+  "keywords": ["discord", "bot", "payment", "verification"],
+  "author": "Dreamzz",
+  "license": "MIT",
+  "dependencies": {
+    "discord.js": "^14.14.1",
+    "dotenv": "^16.3.1",
+    "node-fetch": "^3.3.2"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.0",
+    "typescript": "^5.3.2",
+    "ts-node": "^10.9.1",
+    "nodemon": "^3.0.2"
+  }
+} 

@@ -1,13 +1,21 @@
 import { NextRequest, NextResponse } from 'next/server'
 
 const DISCORD_BOT_TOKEN = process.env.DISCORD_BOT_TOKEN!
-const DISCORD_SERVER_ID = process.env.DISCORD_SERVER_ID!
+const DISCORD_SERVER_ID = process.env.DISCORD_SERVER_ID || '1396704538106531870'
 const MONTHLY_ROLE_ID = process.env.DISCORD_MONTHLY_ROLE_ID || '1405263647663456416'
 const LIFETIME_ROLE_ID = process.env.DISCORD_LIFETIME_ROLE_ID || '1405262797121650778'
 
 export async function POST(request: NextRequest) {
   try {
     const { userId, plan, botToken } = await request.json()
+    
+    console.log('Assign role request:', { userId, plan, botToken: botToken ? 'provided' : 'missing' })
+    console.log('Environment variables:', { 
+      DISCORD_SERVER_ID, 
+      MONTHLY_ROLE_ID, 
+      LIFETIME_ROLE_ID,
+      DISCORD_BOT_TOKEN: DISCORD_BOT_TOKEN ? 'set' : 'missing'
+    })
     
     if (!userId || !plan || !botToken) {
       return NextResponse.json({ 
