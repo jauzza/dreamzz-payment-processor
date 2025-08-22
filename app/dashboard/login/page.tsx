@@ -19,6 +19,8 @@ function LoginContent() {
 
   const handleOAuthCallback = async (code: string) => {
     try {
+      console.log('🔄 Processing OAuth callback with code:', code.substring(0, 10) + '...')
+      
       const response = await fetch('/api/auth/callback', {
         method: 'POST',
         headers: {
@@ -27,13 +29,19 @@ function LoginContent() {
         body: JSON.stringify({ code }),
       })
 
+      console.log('📡 Callback response status:', response.status)
+
       if (response.ok) {
+        console.log('✅ OAuth successful, redirecting to dashboard...')
         router.push('/dashboard')
       } else {
-        console.error('OAuth callback failed')
+        const errorData = await response.json()
+        console.error('❌ OAuth callback failed:', errorData)
+        alert('Login failed: ' + (errorData.message || 'Unknown error'))
       }
     } catch (error) {
-      console.error('OAuth callback error:', error)
+      console.error('❌ OAuth callback error:', error)
+      alert('Login failed: ' + error)
     }
   }
 
