@@ -1,8 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { cookies } from 'next/headers'
 
-const DISCORD_CLIENT_ID = process.env.DISCORD_CLIENT_ID
-const DISCORD_CLIENT_SECRET = process.env.DISCORD_CLIENT_SECRET
+const DISCORD_CLIENT_ID = '1403398146435846154' // Your existing Discord Client ID
+const DISCORD_CLIENT_SECRET = 'xxbLsqizKv0Rx3pMqrWqi4NP5EsVa8dG' // Your existing Discord Client Secret
 
 export async function POST(request: NextRequest) {
   try {
@@ -23,7 +23,7 @@ export async function POST(request: NextRequest) {
         client_secret: DISCORD_CLIENT_SECRET!,
         grant_type: 'authorization_code',
         code,
-        redirect_uri: `${process.env.NEXT_PUBLIC_BASE_URL}/dashboard/login`,
+        redirect_uri: `https://dreamzz.lol/dashboard/login`,
       }),
     })
 

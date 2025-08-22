@@ -56,8 +56,8 @@ async function refreshAccessToken(refreshToken: string) {
         'Content-Type': 'application/x-www-form-urlencoded',
       },
       body: new URLSearchParams({
-        client_id: process.env.DISCORD_CLIENT_ID!,
-        client_secret: process.env.DISCORD_CLIENT_SECRET!,
+        client_id: '1403398146435846154',
+        client_secret: 'xxbLsqizKv0Rx3pMqrWqi4NP5EsVa8dG',
         grant_type: 'refresh_token',
         refresh_token: refreshToken,
       }),
