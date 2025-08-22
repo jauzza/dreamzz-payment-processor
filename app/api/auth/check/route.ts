@@ -6,7 +6,13 @@ export async function GET(request: NextRequest) {
     const cookieStore = cookies()
     const sessionCookie = cookieStore.get('discord_session')
 
+    console.log('🔍 Auth check - Session cookie found:', !!sessionCookie)
+    if (sessionCookie) {
+      console.log('🔍 Auth check - Cookie value length:', sessionCookie.value.length)
+    }
+
     if (!sessionCookie) {
+      console.log('❌ Auth check - No session cookie found')
       return NextResponse.json({ error: 'No session found' }, { status: 401 })
     }
 

@@ -70,13 +70,21 @@ export async function POST(request: NextRequest) {
 
     // Set session cookie (in production, use a proper session store)
     const cookieStore = cookies()
-    cookieStore.set('discord_session', JSON.stringify(sessionData), {
+    const sessionString = JSON.stringify(sessionData)
+    console.log('🍪 Setting session cookie:', {
+      user: userData.username,
+      expiresAt: new Date(sessionData.expiresAt).toISOString(),
+      sessionLength: sessionString.length
+    })
+    
+    cookieStore.set('discord_session', sessionString, {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
       sameSite: 'lax',
       maxAge: 60 * 60 * 24 * 7, // 7 days
     })
 
+    console.log('✅ Session cookie set successfully')
     return NextResponse.json({ success: true })
   } catch (error) {
     console.error('OAuth callback error:', error)
