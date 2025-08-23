@@ -3,7 +3,7 @@ import { cookies } from 'next/headers'
 
 export async function GET(request: NextRequest) {
   try {
-    const cookieStore = cookies()
+    const cookieStore = await cookies()
     const sessionCookie = cookieStore.get('discord_session')
 
     console.log('🔍 Auth check - Session cookie found:', !!sessionCookie)
@@ -39,7 +39,7 @@ export async function GET(request: NextRequest) {
           maxAge: 60 * 60 * 24 * 7, // 7 days
         })
 
-        return NextResponse.json(updatedSessionData.user)
+        return NextResponse.json(updatedSessionData)
       } else {
         // Refresh failed, clear session
         cookieStore.delete('discord_session')
@@ -47,7 +47,7 @@ export async function GET(request: NextRequest) {
       }
     }
 
-    return NextResponse.json(sessionData.user)
+    return NextResponse.json(sessionData)
   } catch (error) {
     console.error('Auth check error:', error)
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 })

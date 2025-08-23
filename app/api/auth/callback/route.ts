@@ -59,23 +59,29 @@ export async function POST(request: NextRequest) {
       guilds = await guildsResponse.json()
     }
 
-    // Create session data
+    // Create minimal session data to fit in cookie (under 4096 chars)
     const sessionData = {
-      user: userData,
-      guilds,
+      id: userData.id,
+      username: userData.username,
+      avatar: userData.avatar,
       accessToken: tokenData.access_token,
       refreshToken: tokenData.refresh_token,
       expiresAt: Date.now() + (tokenData.expires_in * 1000),
     }
 
     // Set session cookie (in production, use a proper session store)
-    const cookieStore = cookies()
+    const cookieStore = await cookies()
     const sessionString = JSON.stringify(sessionData)
     console.log('🍪 Setting session cookie:', {
       user: userData.username,
       expiresAt: new Date(sessionData.expiresAt).toISOString(),
       sessionLength: sessionString.length
     })
+    
+    if (sessionString.length > 4000) {
+      console.error('❌ Session data too large:', sessionString.length, 'characters')
+      return NextResponse.json({ error: 'Session data too large' }, { status: 500 })
+    }
     
     cookieStore.set('discord_session', sessionString, {
       httpOnly: true,
